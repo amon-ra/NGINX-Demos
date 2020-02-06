@@ -10,7 +10,7 @@ jobs:
     - name: Clean install dependencies and build
       run: |
         mkdir -p _build
-        mv * _build
+        mv * _build || true
         mv _build/nginx-regex-tester/regextester/* .
     - name: login
       uses: actions/heroku@master
