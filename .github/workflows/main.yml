@@ -7,6 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Clean install dependencies and build
+      run: |
+        mkdir -p _build
+        mv * _build
+        mv _build/nginx-regex-tester/regextester/* .
     - name: login
       uses: actions/heroku@master
       env:
@@ -15,14 +20,12 @@ jobs:
         args: container:login
     - name: push
       uses: actions/heroku@master
-      working-directory: ./nginx-regex-tester/regextester
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
         args: container:push nginx-regex-tester
     - name: release
       uses: actions/heroku@master
-      working-directory: ./nginx-regex-tester/regextester
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
