@@ -23,10 +23,10 @@ jobs:
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
-        args: container:push nginx-regex-tester
+        args: container:push -a nginx-regex-tester
     - name: release
       uses: actions/heroku@master
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       with:
-        args: container:release nginx-regex-tester
+        args: container:release -a nginx-regex-tester
